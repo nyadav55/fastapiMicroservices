@@ -1,5 +1,5 @@
 # fastapiMicroservices
-<<<<<<< Updated upstream
+
 A project built on Python FastAPI, React, RedisJSON, and Redis Streams creates an ultra-low latency, real-time data processing application. By using Redis for both your primary storage (RedisJSON a NoSQL database just like MongoDB) and your event bus (Redis Streams like RabbitMQ or Apache Kafka), you eliminate the network overhead of talking to separate systems like MongoDB and Kafka, making your app incredibly fast.
 
 # What Real-World Problems This Stack Solves
@@ -31,9 +31,6 @@ HTTP   ▼  │
           ▲
           │ (4) Fetch/Query (e.g., Geospatial calculations)
 
-=======
-Microservices app using Python FastAPI with React on the frontend. We will use RedisJSON as a Database and dispatch events with Redis Streams. RedisJSON is a NoSQL database just like MongoDB and Redis Streams is an Event Bus just like RabbitMQ or Apache Kafka.
-
 
 https://www.youtube.com/watch?v=Cy9fAvsXGZA
->>>>>>> Stashed changes
+
