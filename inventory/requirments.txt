@@ -1,7 +1,22 @@
-fastapi == 
-redis-om == 
+Service	- Inventory Service	
+Storage - PostgreSQL + Redis cache
 
-dbredisid - Database #14683199
-db-redis
-Plan upgrade
-Creation date: 11-Oct-2026 | ID: #3445386
+# PostgreSQL connection details for Inventory:
+- Database: inventory_db
+- Username: inventory
+- Password: devpass
+- Host: localhost
+- Port: 5432
+- Table: products
+
+# Remember this flow
+1. POST /products → Validate data → Save in PostgreSQL.
+2. GET /products/1 → Check Redis first.
+3. Redis hit → Return cached data.
+4. Redis miss → Fetch from PostgreSQL → Cache for 60 seconds → Return data.
+
+# Important learning point: Your current POST endpoint does not invalidate an existing Redis cache. 
+When you add update-stock functionality, you must invalidate or update that cache to avoid returning stale inventory data.
+
+# Run the service from your order_service folder:
+python -m uvicorn main:app --reload --port 8000

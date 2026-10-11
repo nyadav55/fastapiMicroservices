@@ -1,0 +1,16 @@
+Order Service	
+Database - None	
+Storage - In-memory Python dictionary (orders = {})
+
+# Important: The Order Service does not yet have its own database. Orders will be lost when the Order Service restarts.
+# Recommended next step: Create a separate PostgreSQL database named orders_db for the Order Service, so each microservice owns its own data.
+
+# Important limitations to understand
+1. In-memory storage: orders disappear when the Order Service restarts. Use PostgreSQL (orders_db) for persistent storage.
+2. Stock is not deducted: this code checks availability but does not reserve or reduce inventory. Repeated orders could oversell stock.
+3. Concurrent requests: the global order ID counter is not safe for reliable production use.
+4. Naming convention: OrderCreate is preferred over ordercreate because Python class names conventionally use PascalCase.
+
+# Run the service from your order_service folder:
+python -m uvicorn main:app --reload --port 8001
+
