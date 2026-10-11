@@ -1,0 +1,44 @@
+Mr. Nath@LAPTOP-26I1KCDS MINGW64 /e/git_ny_project/fastapiMicroservices (main)
+$ docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED      STATUS          PORTS      NAMES
+c318587ab22b   4e684eb7afe6   "uvicorn main:app --…"   5 days ago   Up 33 seconds   8000/tcp   fastapicrud-web-1
+
+
+# FastAPI microservices project, use local Redis with Docker. 
+# It is free to run locally and lets you practice caching without depending on a cloud account.
+
+# Option 1: Redis Cloud
+1. Open the official website: Redis Cloud
+2. Sign up or log in.
+3. Create a Free subscription if that option is available.
+4. Create a database under that subscription.
+The message “Each database is integrated into a subscription for improved organization” is an informational message. It means you create a subscription first, then create your database within it.
+# Option 2: Run Redis locally for free
+# If you want to avoid cloud subscription setup, use Docker:
+docker run -d --name redis-practice -p 6379:6379 redis:7
+
+# Test Redis:
+docker exec -it redis-practice redis-cli
+
+Then run:
+SET name Narendra (i/p)
+GET name - Narendra (o/p)
+
+# --- Great! Redis is running correctly. Next, connect Redis to your FastAPI microservice.
+Step 1: Exit Redis CLI 
+exit
+Step 2: Install Redis client - From your project root, with your virtual environment activated:
+python -m pip install redis fastapi uvicorn
+Step 3: Create main.py Inside your inventory folder, add code and Run
+cd inventory
+python -m uvicorn main:app --reload
+
+# Step 4: Test in your browser
+Open FastAPI Swagger UI.
+1. Use POST /cache/{key}/{value} — save data.
+2. Use GET /cache/{key} — retrieve data.
+Example: save laptop as the key and 10 as the value.
+
+# **** Remember: Redis runs in its own Docker container, independently of your project folder. 
+Your FastAPI application connects to it through localhost:6379.
+# ****
